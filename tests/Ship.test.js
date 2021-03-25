@@ -9,4 +9,12 @@ describe('Ship', () => {
         const ship = new Ship('Manchester');
         expect(ship.startingPort).toEqual('Manchester');
     });
+
+    it('can set sail', () => {
+        const ship = new Ship('Manchester');
+
+        ship.setSail();
+
+        expect(ship.startingPort).toBeFalsy();
+    })
 });
