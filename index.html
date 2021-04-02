@@ -6,23 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cruise Ships</title>
     <link rel="stylesheet" type="text/css" href="./css/normalize.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 
 <body>
     <div id="viewport">
         <div id="ports"></div>
+        <div id="ship"></div>
+        <button id="sailbutton">Set sail!</button>
     </div>
 
     <script src="./src/Controller.js"></script>
     <script src="./src/Port.js"></script>
     <script src="./src/Itinerary.js"></script>
     <script>
-        const controllerInst = new Controller();
         const dover = new Port('Dover');
         const calais = new Port('Calais');
-        const itineraryInst = new Itinerary([dover, calais]);
-        controllerInst.renderPorts(itineraryInst.ports)
+        const itinerary = new Itinerary([dover, calais]);
+        const ship = new Ship(itinerary);
+        const controllerInst = new Controller(ship);
+        controllerInst.renderPorts(itinerary.ports);
+        controllerInst.renderShip();
     </script>
 </body>
 
