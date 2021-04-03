@@ -1,5 +1,3 @@
-const Port = require('../src/Port');
-
 (function exportShip() {
     const Ship = function (itinerary) {
         this.itinerary = itinerary;
@@ -29,6 +27,7 @@ const Port = require('../src/Port');
         this.currentPort = itinerary.ports[previousPortIndex + 1];
 
         this.currentPort.addShip(this);
+
     }
 
     if (typeof module !== 'undefined' && module.exports) {

@@ -55,6 +55,37 @@
         const currentPortIndex = ship.itinerary.ports.indexOf(ship.currentPort);
         const nextPortIndex = currentPortIndex + 1;
         const nextPortElement = document.querySelector(`[data-port-index='${nextPortIndex}']`);
+        if (!nextPortElement) {
+            return alert('End of the line!');
+        }
+
+        this.renderMessage(`Now departing ${ship.currentPort.name}`);
+
+        const shipElement = document.querySelector('#ship');
+        const sailInterval = setInterval(() => {
+            const shipLeft = parseInt(shipElement.style.left, 10);
+            if (shipLeft === (nextPortElement.offsetLeft - 32)) {
+                ship.setSail();
+                ship.dock();
+                clearInterval(sailInterval);
+            }
+
+            shipElement.style.left = `${shipLeft + 1}px`;
+        }, 20);
+    }
+
+    Controller.prototype.renderMessage = function (message) {
+        const messageElement = document.createElement('div');
+        messageElement.id = message;
+        messageElement.innerHTML = message;
+
+        const viewport = document.querySelector('#viewport');
+        viewport.appendChild(messageElement);
+
+        setTimeout(() => {
+            viewport.removeChild(messageElement);
+        }, 2000);
+
     }
 
     if (typeof module !== 'undefined' && module.exports) {
